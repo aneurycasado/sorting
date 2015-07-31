@@ -13,8 +13,32 @@ function bubbleSort(array){
   return bubbleSort(array);
 }
 
+function merge(array1,array2){
+  var mergedArray = [];
+  while (array1.length && array2.length){
+    if (array1[0]<=array2[0]) {
+      mergedArray.push(array1.shift());
+    }
+    mergedArray.push(array2.shift());
+  }
+  if(array1.length > 0){
+    mergedArray = mergedArray.concat(array1);
+  }else if(array2.length > 0){
+    mergedArray = mergedArray.concat(array2);
+  }
+  return mergedArray;
+}
+
+
 function mergeSort(array){
-
-
-
+  if (array.length<2) {return array;}
+  else {
+    var middle = Math.floor(array.length/2);
+    var firstArray = array.slice(0,middle);
+    var sndArray = array.slice(middle);
+    var leftMerge = mergeSort(firstArray);
+    var rightMerge = mergeSort(sndArray);
+    array = merge(leftMerge,rightMerge);
+    return array;
+  }
 }
