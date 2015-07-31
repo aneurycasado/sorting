@@ -16,16 +16,11 @@ function bubbleSort(array){
 function merge(array1,array2){
   var mergedArray = [];
   while (array1.length && array2.length){
-    while(array1[0]<=array2[0]) {
-      mergedArray.push(array1.shift());
-    }
+    while(array1[0]<=array2[0]) mergedArray.push(array1.shift());
     mergedArray.push(array2.shift());
   }
-  if(array1.length > 0){
-    mergedArray = mergedArray.concat(array1);
-  }else if(array2.length > 0){
-    mergedArray = mergedArray.concat(array2);
-  }
+  if(array1.length > 0) mergedArray = mergedArray.concat(array1);
+  else if(array2.length > 0) mergedArray = mergedArray.concat(array2);
   return mergedArray;
 }
 
