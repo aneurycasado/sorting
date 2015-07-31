@@ -15,8 +15,7 @@ function bubbleSort(array){
 
 function halve (arr) {
   var middleIndex = Math.ceil(arr.length / 2);
-  var right = arr.splice(middleIndex);
-  return [arr, right];
+  return [arr.slice(0,middleIndex), arr.slice(middleIndex)];
 }
 
 function merge (sortedA, sortedB) {
@@ -28,11 +27,14 @@ function merge (sortedA, sortedB) {
       merged.push(sortedB.shift());
     }
   }
+  // if one of the arrays still has elements, they get added to the end of merged
   return merged.concat(sortedA).concat(sortedB);
 }
 
 function mergeSort (arr) {
-  if (arr.length < 2) return arr;
+  if (arr.length < 2) {
+    return arr;
+  }
   // halves the array
   // mergeSorts the halves
   // merges the now sorted halves
