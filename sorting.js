@@ -16,7 +16,7 @@ function bubbleSort(array){
 function merge(array1,array2){
   var mergedArray = [];
   while (array1.length && array2.length){
-    if (array1[0]<=array2[0]) {
+    while(array1[0]<=array2[0]) {
       mergedArray.push(array1.shift());
     }
     mergedArray.push(array2.shift());
@@ -28,7 +28,6 @@ function merge(array1,array2){
   }
   return mergedArray;
 }
-
 
 function mergeSort(array){
   if (array.length<2) {return array;}
