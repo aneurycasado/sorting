@@ -1,17 +1,24 @@
-
-function swap (left,right){
-  if(left)
-
-
+function ourSort(array){
+  var quit = true;
+  for(var i = 0; i < array.length-1; i++){
+    var a = array[i];
+    var b = array[i+1];
+    if(b < a){
+      array[i] = b;
+      array[i+1] = a;
+      quit = false;
+    }
+  }
+  if(quit) return array;
+  return ourSort(array);
 }
 
 function bubbleSort(array){
-  if(array.length <= 1){
-    return array;
-  }else{
-    var left = bubbleSort(array);
-    var right = bubbleSort(array);
-    var array = swap(left,right)
-    return array;
-  }
+  array = ourSort(array);
+  return array;
+}
+
+function mergeSort(array){
+  
+
 }
