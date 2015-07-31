@@ -13,31 +13,29 @@ function bubbleSort(array){
   return bubbleSort(array);
 }
 
-function merge(array1,array2){
-  var mergedArray = [];
-  while (array1.length && array2.length){
-    while(array1[0]<=array2[0]) {
-      mergedArray.push(array1.shift());
-    }
-    mergedArray.push(array2.shift());
-  }
-  if(array1.length > 0){
-    mergedArray = mergedArray.concat(array1);
-  }else if(array2.length > 0){
-    mergedArray = mergedArray.concat(array2);
-  }
-  return mergedArray;
+function halve (arr) {
+  var middleIndex = Math.ceil(arr.length / 2);
+  var right = arr.splice(middleIndex);
+  return [arr, right];
 }
 
-function mergeSort(array){
-  if (array.length<2) {return array;}
-  else {
-    var middle = Math.floor(array.length/2);
-    var firstArray = array.slice(0,middle);
-    var sndArray = array.slice(middle);
-    var leftMerge = mergeSort(firstArray);
-    var rightMerge = mergeSort(sndArray);
-    array = merge(leftMerge,rightMerge);
-    return array;
+function merge (sortedA, sortedB) {
+  var merged = [];
+  while (sortedA.length && sortedB.length) {
+    if (sortedA[0] < sortedB[0]) {
+      merged.push(sortedA.shift());
+    } else {
+      merged.push(sortedB.shift());
+    }
   }
+  return merged.concat(sortedA).concat(sortedB);
+}
+
+function mergeSort (arr) {
+  if (arr.length < 2) return arr;
+  // halves the array
+  // mergeSorts the halves
+  // merges the now sorted halves
+  var halves = halve(arr);
+  return merge(mergeSort(halves[0]), mergeSort(halves[1]));
 }
