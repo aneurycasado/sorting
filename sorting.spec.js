@@ -11,7 +11,24 @@ describe('Bubble Sort', function(){
     it('handles an already sorted array', function(){
         expect( bubbleSort([2,3,4,7,8]) ).toEqual( [2,3,4,7,8] );
     });
-
+    it('calls itself once on an empty array', function() {
+      spyOn(window, 'bubbleSort').and.callThrough();
+      var arr = [];
+      bubbleSort(arr);
+      expect(bubbleSort.calls.count()).toEqual(1);
+    });
+    it('calls itself once on an array with one element', function() {
+      spyOn(window, 'bubbleSort').and.callThrough();
+      var arr = [1];
+      bubbleSort(arr);
+      expect(bubbleSort.calls.count()).toEqual(1);
+    });
+    it('calls itself ??? on an array with two elements', function() {
+      spyOn(window, 'bubbleSort').and.callThrough();
+      var arr = [2,1];
+      bubbleSort(arr);
+      expect(bubbleSort.calls.count()).toEqual(1);
+    });
 });
 
 
