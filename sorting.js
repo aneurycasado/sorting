@@ -1,4 +1,4 @@
-function ourSort(array){
+function bubbleSort(array){
   var quit = true;
   for(var i = 0; i < array.length-1; i++){
     var a = array[i];
@@ -10,15 +10,11 @@ function ourSort(array){
     }
   }
   if(quit) return array;
-  return ourSort(array);
-}
-
-function bubbleSort(array){
-  array = ourSort(array);
-  return array;
+  return bubbleSort(array);
 }
 
 function mergeSort(array){
-  
+
+
 
 }
