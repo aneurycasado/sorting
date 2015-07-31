@@ -11,4 +11,5 @@ describe('Bubble Sort', function(){
     it('handles an already sorted array', function(){
         expect( bubbleSort([2,3,4,7,8]) ).toEqual( [2,3,4,7,8] );
     });
+
 });
