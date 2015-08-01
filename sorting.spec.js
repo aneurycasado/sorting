@@ -1,67 +1,91 @@
-describe('Bubble Sort', function(){
-    it('handles an empty array', function(){
-        expect( bubbleSort([]) ).toEqual( [] );
+describe('Bubble sort', function () {
+
+  it('sorts an empty array', function () {
+    expect(bubbleSort([])).toEqual([]);
+  });
+
+  it('sorts an array of one element', function () {
+    expect(bubbleSort([10])).toEqual([10]);
+  });
+
+  it('sorts an array of n elements', function () {
+    var randomArray = [];
+    var n = Math.floor(Math.random() * 80 + 20);
+    while (n--) {
+      var randomNum = Math.floor(Math.random() * 50)
+      randomArray.push(randomNum);
+    }
+    var sortedCopy = randomArray.slice();
+    sortedCopy.sort(function (a, b) {
+      return a - b;
     });
-    it('handles an empty array', function(){
-        expect( bubbleSort([8,7,6,5,4,3,2,1]) ).toEqual( [1,2,3,4,5,6,7,8] );
-    });
-    it('sorts an array', function(){
-        expect( bubbleSort([3,5,4,1]) ).toEqual( [1,3,4,5] );
-    });
-    it('handles an already sorted array', function(){
-        expect( bubbleSort([2,3,4,7,8]) ).toEqual( [2,3,4,7,8] );
-    });
-    it('calls itself once on an empty array', function() {
-      spyOn(window, 'bubbleSort').and.callThrough();
-      var arr = [];
-      bubbleSort(arr);
-      expect(bubbleSort.calls.count()).toEqual(1);
-    });
-    it('calls itself once on an array with one element', function() {
-      spyOn(window, 'bubbleSort').and.callThrough();
-      var arr = [1];
-      bubbleSort(arr);
-      expect(bubbleSort.calls.count()).toEqual(1);
-    });
-    it('calls itself ??? on an array with two elements', function() {
-      spyOn(window, 'bubbleSort').and.callThrough();
-      var arr = [2,1];
-      bubbleSort(arr);
-      expect(bubbleSort.calls.count()).toEqual(1);
-    });
+    expect(bubbleSort(randomArray)).toEqual(sortedCopy);
+  });
+
 });
 
 
-describe('Merge Sort', function(){
-    xit('handles an empty array', function(){
-        expect( mergeSort([]) ).toEqual( [] );
+describe('Merge sort', function () {
+
+  describe('halve', function () {
+
+    it('returns two arrays', function () {
+      expect(halve([])).toEqual([[],[]]);
     });
-    xit('takes an array of numbers, and returns a correctly sorted array', function(){
-        expect( mergeSort([8,7,6,5,4,3,2,1]) ).toEqual( [1,2,3,4,5,6,7,8] );
+
+    it('halves array of even length', function () {
+      expect(halve(['a', 'b', 'c', 'd'])).toEqual([['a', 'b'], ['c', 'd']])
     });
-    xit('takes an array of strings, and returns a correctly sorted array', function(){
-        expect( mergeSort(['c','a','b','e','d']) ).toEqual( ['a','b','c','d','e'] );
+
+    it('halves array of odd length', function () {
+      expect(halve(['a', 'b', 'c'])).toEqual([['a', 'b'], ['c']]);
     });
-    it('handles an already sorted array', function(){
-        expect( mergeSort([2,3,4,7,8]) ).toEqual( [2,3,4,7,8] );
+
+  });
+
+  describe('merge', function () {
+
+    it('returns an array', function () {
+      expect(merge([], [])).toEqual([]);
     });
-    xit('calls itself once on an empty array', function() {
-      spyOn(window, 'mergeSort').and.callThrough();
-      var arr = [];
-      mergeSort(arr);
-      expect(mergeSort.calls.count()).toEqual(1);
+
+    it('given two already sorted arrays of equal length, returns sorted result array', function () {
+      var left = [2,4,5];
+      var right = [1,6,8];
+      expect(merge(left, right)).toEqual([1,2,4,5,6,8]);
     });
-    xit('calls itself once on an array with one element', function() {
-      spyOn(window, 'mergeSort').and.callThrough();
-      var arr = [1];
-      mergeSort(arr);
-      expect(mergeSort.calls.count()).toEqual(1);
+
+    it('works for arrays of unequal length', function () {
+      var left = [2,4,5];
+      var right = [1,6];
+      expect(merge(left, right)).toEqual([1,2,4,5,6]);
+      right = [2,4,5];
+      left = [1,6];
+      expect(merge(left, right)).toEqual([1,2,4,5,6]);
     });
-    /*
-    it('calls itself n + 1 times', function() {
-      spyOn(window, 'mergeSort').and.callThrough();
-      var arr = [5,4,3,2,1];
-      mergeSort(arr);
-      expect(mergeSort.calls.count()).toEqual();
-    });*/
+
+  });
+
+  describe('mergeSort', function () {
+
+    it('with 1 or fewer elements, returns sorted array', function () {
+      expect(mergeSort([5])).toEqual([5]);
+    });
+
+    it('does the thing its supposed to do', function () {
+      var randomArray = [];
+      var n = Math.floor(Math.random() * 80 + 20);
+      while (n--) {
+        var randomNum = Math.floor(Math.random() * 50)
+        randomArray.push(randomNum);
+      }
+      var sortedCopy = randomArray.slice();
+      sortedCopy.sort(function (a, b) {
+        return a - b;
+      });
+      expect(mergeSort(randomArray)).toEqual(sortedCopy);
+    });
+
+  });
+
 });

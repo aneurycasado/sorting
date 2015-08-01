@@ -24,15 +24,31 @@ function merge(array1,array2){
   return mergedArray;
 }
 
-function mergeSort(array){
-  if (array.length<2) {return array;}
-  else {
-    var middle = Math.floor(array.length/2);
-    var firstArray = array.slice(0,middle);
-    var sndArray = array.slice(middle);
-    var leftMerge = mergeSort(firstArray);
-    var rightMerge = mergeSort(sndArray);
-    array = merge(leftMerge,rightMerge);
-    return array;
+function halve (arr) {
+  var middleIndex = Math.ceil(arr.length / 2);
+  return [arr.slice(0,middleIndex), arr.slice(middleIndex)];
+}
+
+function merge (sortedA, sortedB) {
+  var merged = [];
+  while (sortedA.length && sortedB.length) {
+    if (sortedA[0] < sortedB[0]) {
+      merged.push(sortedA.shift());
+    } else {
+      merged.push(sortedB.shift());
+    }
   }
+  // if one of the arrays still has elements, they get added to the end of merged
+  return merged.concat(sortedA).concat(sortedB);
+}
+
+function mergeSort (arr) {
+  if (arr.length < 2) {
+    return arr;
+  }
+  // halves the array
+  // mergeSorts the halves
+  // merges the now sorted halves
+  var halves = halve(arr);
+  return merge(mergeSort(halves[0]), mergeSort(halves[1]));
 }
